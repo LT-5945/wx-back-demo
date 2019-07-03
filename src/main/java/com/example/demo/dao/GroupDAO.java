@@ -40,5 +40,4 @@ public interface GroupDAO {
 
     @Update(value = "UPDATE `group` SET group_name = #{group_name}, group_desc = #{group_desc}, group_type = ${group_type} WHERE group_id = #{group_id}")
     int update(Group group);
-
 }

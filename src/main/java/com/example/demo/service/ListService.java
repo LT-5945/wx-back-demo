@@ -6,6 +6,7 @@ import com.example.demo.entity.Member;
 import com.example.demo.entity.Mission;
 import com.example.demo.entity.User;
 import com.example.demo.http.GroupResponse;
+import com.example.demo.service.impl.PersenalMissionStatus;
 
 import java.util.List;
 
@@ -42,6 +43,10 @@ public interface ListService {
     void deleteByMissionID(Mission mission);
     void deleteAllDone(int group_id);
     List<Mission> selectByID(int user_id,int group_id);
+    List<PersenalMissionStatus> selectPnDoneNum(int user_id, int group_id);
+    int selectAllNum(int group_id);
+    int selectDoneNum(int group_id);
+    List<Integer> selectMemberALL(int group_id);
 
     //methods not DAO
     List<GroupResponse> getGroupsForUser(int id);

@@ -237,6 +237,58 @@ public class ListServiceImpl implements ListService {
     }
 
     /**
+     * 查询一组内成员总数
+     * @param group_id
+     * @return
+     */
+    @Override
+    public List<Integer> selectMemberALL(int group_id) {
+        List<Integer> result = missionDAO.selectMemberALL(group_id);
+        return result;
+    }
+
+    /**
+     * 查询个人任务完成数
+     * @param user_id
+     * @param group_id
+     * @return
+     */
+    @Override
+    public List<PersenalMissionStatus> selectPnDoneNum(int user_id, int group_id) {
+        List<PersenalMissionStatus> result = new ArrayList<>();//存储成员名称及其完成数量
+        List<Integer> memberALL = selectMemberALL(group_id);
+        //需要每个任务组内的成员List
+        for(Integer x: memberALL){
+            int num = missionDAO.selectPnDoneNum(user_id,group_id);
+            PersenalMissionStatus PMS = new PersenalMissionStatus(user_id,num);
+            result.add(PMS);
+        }
+        return null;
+    }
+
+    /**
+     * 查询群组已完成的任务数
+     * @param group_id
+     * @return
+     */
+    @Override
+    public int selectDoneNum(int group_id) {
+        int result = missionDAO.selectDoneNum(group_id);
+        return result;
+    }
+
+    /**
+     * 查询群组全部任务数
+     * @param group_id
+     * @return
+     */
+    @Override
+    public int selectAllNum(int group_id) {
+        int result = missionDAO.selectAllNum(group_id);
+        return result;
+    }
+
+    /**
      * 获取member_id
      * @param user_id
      * @param group_id
