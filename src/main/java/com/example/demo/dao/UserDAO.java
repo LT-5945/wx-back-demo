@@ -20,9 +20,6 @@ public interface UserDAO {
     @Select(value = "SELECT * FROM `user` WHERE wx_openid = #{_parameter} LIMIT 1")
     List<User> getUserByOpenId(String open_id);
 
-    @Select(value = "SELECT * FROM `user` WHERE token = '#{_parameter}' LIMIT 1")
-    List<User> getUserByToken(String token);
-
     @Insert(value = "INSERT INTO `user`\n" +
             "(`nickname`,\n" +
             "`wx_openid`,\n" +

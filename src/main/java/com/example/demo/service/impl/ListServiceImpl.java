@@ -3,9 +3,11 @@ package com.example.demo.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.GroupDAO;
 import com.example.demo.dao.MemberDAO;
+import com.example.demo.dao.MissionDAO;
 import com.example.demo.dao.UserDAO;
 import com.example.demo.entity.Group;
 import com.example.demo.entity.Member;
+import com.example.demo.entity.Mission;
 import com.example.demo.entity.User;
 import com.example.demo.http.GroupResponse;
 import com.example.demo.service.ListService;
@@ -22,18 +24,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-class Wx_app{
-    private static final String appid = "wx08e8d81ed6a89ec4";
-    private static final String appsecret = "fa1ff710ea934cd5810b056e4d7322e7";
-
-    public String getAppid() {
-        return appid;
-    }
-
-    public String getAppsecret() {
-        return appsecret;
-    }
-}
 @Service
 public class ListServiceImpl implements ListService {
 
@@ -43,6 +33,16 @@ public class ListServiceImpl implements ListService {
     private MemberDAO memberDAO;
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private MissionDAO missionDAO;
+
+    /**
+     * 登陆
+     * @param nickname
+     * @param avatar_url
+     * @param auth_code
+     * @return
+     */
     @Override
     public User loginByAuthCode(String nickname, String avatar_url, String auth_code) {
 
@@ -109,6 +109,12 @@ public class ListServiceImpl implements ListService {
         return result;
     }
 
+    /**
+     * 解码GroupResponse的内容
+     * @param result
+     * @param g
+     * @param b
+     */
     private void convertGroup(List<GroupResponse> result, Group g, boolean b) {
         result.add(convertGroup(g,b));
     }
@@ -160,7 +166,7 @@ public class ListServiceImpl implements ListService {
     }
 
     /**
-     * 更改用户（目前用不上）
+     * 更新群组用户名单（目前用不上）
      * @param member
      * @return
      */
@@ -181,8 +187,113 @@ public class ListServiceImpl implements ListService {
         return null;
     }
 
+    /**
+     * 通过user_id获取group_id
+     * @param id
+     * @return
+     */
     @Override
     public Group getGroupById(int id){
         return groupDAO.getGroupById(id);
+    }
+
+    /**
+     * 插入任务数据到数据库
+     * @param mission
+     */
+    @Override
+    public void insertByMissionID(Mission mission) {
+        missionDAO.insertByMissionID(mission);
+    }
+
+    /**
+     * 删除某一任务
+     * @param mission
+     */
+    @Override
+    public void deleteByMissionID(Mission mission) {
+        missionDAO.deleteByMissionID(mission);
+    }
+
+    /**
+     * 删除全部已完成任务
+     * @param group_id
+     */
+    @Override
+    public void deleteAllDone(int group_id) {
+        missionDAO.deleteAllDone(group_id);
+    }
+
+    /**
+     * 选择任务
+     * @param user_id
+     * @param group_id
+     * @return
+     */
+    @Override
+    public List<Mission> selectByID(int user_id, int group_id) {
+        List<Mission> mission = missionDAO.selectByID(user_id,group_id);
+        return mission;
+    }
+
+    /**
+     * 获取member_id
+     * @param user_id
+     * @param group_id
+     * @return
+     */
+    @Override
+    public int getMemberID(int user_id, int group_id) {
+        int member_id = memberDAO.getMemberID(user_id,group_id);
+        return member_id;
+    }
+
+    /**
+     * 获取用户信息，历史遗留
+     * @param open_id
+     * @return
+     */
+    @Override
+    public List<User> getUserByOpenId(String open_id) {
+        return null;
+    }
+
+    /**
+     * 插入用户，历史遗留
+     * @param user
+     */
+    @Override
+    public void insert(User user) {
+
+    }
+
+    /**
+     * 更改用户信息，历史遗留
+     * @param user
+     * @return
+     */
+    @Override
+    public int update(User user) {
+        return 0;
+    }
+
+    /**
+     * 历史遗留
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Group> getGroupForUserFromUserId(int id) {
+        return null;
+    }
+
+    /**
+     * 历史遗留
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Group> getGroupForAdminFromUserId(int id) {
+        return null;
     }
 }

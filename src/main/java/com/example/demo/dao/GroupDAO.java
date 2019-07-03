@@ -21,6 +21,7 @@ public interface GroupDAO {
 
     @Select(value = "SELECT `group`.* FROM `group` WHERE user_id = #{_parameter}")
     List<Group> getGroupForAdminFromUserId(int id);
+
     @Select(value = "SELECT `group`.* FROM `group` WHERE group_id = #{_parameter} LIMIT 1")
     Group getGroupById(int id);
 
