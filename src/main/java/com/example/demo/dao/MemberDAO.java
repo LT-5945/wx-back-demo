@@ -35,5 +35,9 @@ public interface MemberDAO {
     int update (Member member);
 
     @Select(value="SELECT * FROM `member` WHERE group_id = #{_parameter}")
-    List<Member> getMemberByGroupId(int id);
+    List<Member> getMemberByGroupId(int id);//id = group_id
+
+    //通过user_id和group_id获取member_id
+    @Select(value = "SELECT `member`.* FROM `member` WHERE user_id = #{0} AND group_id = #{1)")
+    int getMemberID(int user_id, int group_id);
 }

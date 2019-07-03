@@ -9,6 +9,7 @@ import lombok.Data;
  **/
 @Data
 public class Mission {
+
     private Integer mission_id;
     private String mission_name;
     private String mission_desc;
