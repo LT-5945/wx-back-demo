@@ -39,11 +39,11 @@ public interface ListService {
     int getMemberID(int user_id, int group_id);
 
     //MisssionDAO
-    void insertByMissionID(Mission mission);
+    void insertByMissionID(Mission mission,Integer member_id);
     void deleteByMissionID(Mission mission);
     void deleteAllDone(int group_id);
     List<Mission> selectByID(int user_id,int group_id);
-    List<PersenalMissionStatus> selectPnDoneNum(int user_id, int group_id);
+    List<PersenalMissionStatus> selectPnDoneNumImpl(int group_id);
     int selectAllNum(int group_id);
     int selectDoneNum(int group_id);
     List<Integer> selectMemberALL(int group_id);

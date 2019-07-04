@@ -202,8 +202,8 @@ public class ListServiceImpl implements ListService {
      * @param mission
      */
     @Override
-    public void insertByMissionID(Mission mission) {
-        missionDAO.insertByMissionID(mission);
+    public void insertByMissionID(Mission mission,Integer member_id) {
+        missionDAO.insertByMissionID(mission,member_id);
     }
 
     /**
@@ -249,18 +249,18 @@ public class ListServiceImpl implements ListService {
 
     /**
      * 查询个人任务完成数
-     * @param user_id
+     * 7月4日联调前发现bug，进行修复,改动PersenalMissionStatus类、missionDAO.selectPnDoneNum方法和本方法
      * @param group_id
      * @return
      */
     @Override
-    public List<PersenalMissionStatus> selectPnDoneNum(int user_id, int group_id) {
+    public List<PersenalMissionStatus> selectPnDoneNumImpl(int group_id) {
         List<PersenalMissionStatus> result = new ArrayList<>();//存储成员名称及其完成数量
         List<Integer> memberALL = selectMemberALL(group_id);
         //需要每个任务组内的成员List
         for(Integer x: memberALL){
-            int num = missionDAO.selectPnDoneNum(user_id,group_id);
-            PersenalMissionStatus PMS = new PersenalMissionStatus(user_id,num);
+            int num = missionDAO.selectPnDoneNum(x);
+            PersenalMissionStatus PMS = new PersenalMissionStatus(x,num);
             result.add(PMS);
         }
         return null;

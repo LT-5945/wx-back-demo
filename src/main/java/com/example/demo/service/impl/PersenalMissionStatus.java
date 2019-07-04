@@ -1,20 +1,20 @@
 package com.example.demo.service.impl;
 
 public class PersenalMissionStatus {
-    private int user_id;
+    private int member_id;//7.4由user_id改为member_id
     private int missionDoneNum;
 
-    public PersenalMissionStatus(int user_id, int missionDoneNum) {
-        this.user_id = user_id;
+    public PersenalMissionStatus(int member_id, int missionDoneNum) {
+        this.member_id = member_id;
         this.missionDoneNum = missionDoneNum;
     }
 
     public int getUser_id() {
-        return user_id;
+        return member_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(int member_id) {
+        this.member_id = member_id;
     }
 
     public int getMissionDoneNum() {

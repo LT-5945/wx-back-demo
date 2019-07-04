@@ -87,6 +87,11 @@ public class ListController {
 
 
 //    URL/createMission【创建任务】
+    @RequestMapping(value = "/createMission", method = RequestMethod.POST)
+    public Mission insertMission(@RequestBody Mission mission, @RequestParam(name="user_id", defaultValue="") int token){
+        listService.insertByMissionID(mission,mission.getMember_id());
+        return mission;
+    }
 //    URL/updateMission【编辑任务】
 //    URL/deleteMission【删除任务】
 //    URL/getMissionssForUser【查找任务（成员）】
