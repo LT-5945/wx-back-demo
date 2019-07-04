@@ -36,7 +36,7 @@ public interface MissionDAO {
             "#{member_id},\n" +
             "#{mission_type})\n")
     @Options(useGeneratedKeys = true, keyProperty = "mission_id", keyColumn = "mission_id")
-    void insertByMissionID(Mission mission);
+    void insertByMissionID(Mission mission, Integer member_id);
 
     //按MissionID删除
     @Delete(value = "DELETE FROM `mission`" +
@@ -53,8 +53,8 @@ public interface MissionDAO {
     List<Mission> selectByID(int user_id,int group_id);
 
     //查询个人已完成任务数
-    @Select(value = "SELECT count(*) FROM `mission` WHERE `member_id` IN (SELECT `member_id` FROM `member` WHERE user_id = #{0} AND group_id = #{1})")
-    int selectPnDoneNum(int user_id, int group_id);
+    @Select(value = "SELECT count(*) FROM `mission` WHERE `member_id` = #{0}")
+    int selectPnDoneNum(int member_id);
 
     //查询群组已完成任务数
     @Select(value = "SELECT count(*) FROM `mission` WHERE `member_id` IN (SELECT `member_id` FROM `member` WHERE group_id = #{0}) AND mission_type = 1")
