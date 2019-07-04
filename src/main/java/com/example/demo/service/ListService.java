@@ -39,7 +39,7 @@ public interface ListService {
     int getMemberID(int user_id, int group_id);
 
     //MisssionDAO
-    void insertByMissionID(Mission mission,Integer member_id);
+    void insertByMissionID(Mission mission);
     void deleteByMissionID(Mission mission);
     void deleteAllDone(int group_id);
     List<Mission> selectByID(int user_id,int group_id);

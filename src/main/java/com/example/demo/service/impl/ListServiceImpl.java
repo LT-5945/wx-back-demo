@@ -202,8 +202,8 @@ public class ListServiceImpl implements ListService {
      * @param mission
      */
     @Override
-    public void insertByMissionID(Mission mission,Integer member_id) {
-        missionDAO.insertByMissionID(mission,member_id);
+    public void insertByMissionID(Mission mission) {
+        missionDAO.insertByMissionID(mission);
     }
 
     /**

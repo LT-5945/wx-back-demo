@@ -36,7 +36,7 @@ public interface MissionDAO {
             "#{member_id},\n" +
             "#{mission_type})\n")
     @Options(useGeneratedKeys = true, keyProperty = "mission_id", keyColumn = "mission_id")
-    void insertByMissionID(Mission mission, Integer member_id);
+    void insertByMissionID(Mission mission);
 
     //按MissionID删除
     @Delete(value = "DELETE FROM `mission`" +
